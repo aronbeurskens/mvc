@@ -3,7 +3,7 @@ Very low memory MVC
 MVC in PHP that will never exceed 1 MB memory usage, including with PHP memory usage (256 kb).
 The idea is avoiding data carry by using techniques like late binding, callbacks, querying etc. 
 And of course no globals (except DOCROOT), no constants, no recursions, no reserved magic words.
-Classes do also avoid constants and unnecessary class-global variables (which should live in memory).
+Classes do also avoid constants and unnecessary class-global variables (which would live in memory).
 Almost all memory usage is caused by requiring and creating new objects only.
 
 Front-end development is a completely separated project. Front-end files do not receive bunch of data. 
