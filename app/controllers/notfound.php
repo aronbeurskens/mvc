@@ -12,7 +12,7 @@
 
 namespace app\controllers;
 
-class notfound extends \src\vendor\Webist\Director
+class notfound extends Director
 {
 
     public function index($request)

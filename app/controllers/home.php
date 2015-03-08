@@ -12,7 +12,7 @@
 
 namespace app\controllers;
 
-class home extends \src\vendor\Webist\Director
+class home extends Director
 {
 
     //@Notice, no constructor here. A controller is a ( Coordinator, Manager, Facilitator) for the others.

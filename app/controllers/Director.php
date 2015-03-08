@@ -10,9 +10,9 @@
  *
  */
 
-namespace src\vendor\Webist;
+namespace app\controllers;
 
-class Director 
+class Director
 {
     /**
      * Director is the Controller of Controllers of the organization.

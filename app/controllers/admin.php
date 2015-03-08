@@ -12,7 +12,7 @@
 
 namespace app\controllers;
 
-class admin extends \src\vendor\Webist\Director
+class admin extends Director
 {
 
     public function index($request)

@@ -12,10 +12,10 @@
 
 namespace src\vendor\Webist;
 
-class Controller 
+class Controller
 {
     /*
-     * Surprised by empty Core App object?
+     * Surprised by empty Controller object?
      * Let me tell you the truth. There is no such a thing like framework.
      * As long as an object is not a part of a model that forms a component like service it should be independent.
      *
@@ -30,7 +30,8 @@ class Controller
      *
      */
 
-    //@Notice, we dont prefer loading/injecting objects into other objects, but require from the client object to maket it born into.
+    //@Notice, we dont prefer loading/injecting objects into other objects,
+    //but require from the client object to maket it born into.
     //public $request = null;
 
 }
