@@ -38,5 +38,5 @@ $invoker = $dispatcher->handle($handler);
 $invoker["reflectionMethod"]->invokeArgs($invoker["reflectionClass"]->newInstance(), [$request]);
 
 //test memory usage etc.
-//$test = new app\core\Test;
+//$test = new src\vendor\Webist\Test;
 //print $test->results();
