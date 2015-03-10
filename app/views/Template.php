@@ -21,6 +21,20 @@ namespace app\views;
 
 class Template {
 
+
+    /*
+     * @todo templates juggle
+     *
+     * While Templates and View not really separated See more at: http://chadminick.com/articles/simple-php-template-engine.html#sthash.wp4WbTc8.dpuf
+     * private $vars = array();
+     * public function __get($name) { return $this->vars[$name]; }
+     * public function __set($name, $value) { if($name == 'view_template_file') { throw new Exception("Cannot bind variable named 'view_template_file'"); }
+     * $this->vars[$name] = $value; }
+     */
+
+
+
+
     //default template directory
     private $dir = null;
 
@@ -37,10 +51,12 @@ class Template {
 
         $path = $this->dir() . $file;
 
+        //@Notice returning the path only, not buffering the content.
         if (!file_exists($path)) {
             header("HTTP/1.0 404 Not Found.");
             $path = $this->dir() . "/frontend/page-404.php";
         }
+
 
         return $path;
     }

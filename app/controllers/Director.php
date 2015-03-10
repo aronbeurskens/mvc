@@ -85,9 +85,97 @@ class Director
 
     public function model($model, $context = null)
     {
+        /* a research how to structure a model
+         * http://stackoverflow.com/questions/5863870/how-should-a-model-be-structured-in-mvc
+         * (contact this guy and show the github dir)
+         *
+         * Model = Layer = Organisation of programming into separate functional components
+         * that interact in some sequential and hieracrhial way, with each layer usually having an interface only to the layer
+         * above it and the layer below it. (interfaces define the connection between the layers).
+         * A model can be build of n layers. For example TCP/IP two layers. 1. provide transport 2. provide network adress.
+         * Model != Single Class
+         * Model != Single Object
+         * Model != ORM technique
+         * Model != abstraction of db tables
+         *
+         *
+         * 1. Domain Object(s) `structures/layers`
+         * Domain info container.
+         * Represents Entity business. (Business logic).
+         * Validates or gives the instructions how to validate (data, ...). Notice dataMapper(is a worker) validate things for own funtionality, Director does not validate those.
+         * Gives permissions
+         * Computes costs (memory ...)
+         *
+         * Not aware of Storage, SQL Database, Rest API, Text File, etc). Even those resources are get saved or retrieved.
+         *
+         * In a company organization context the tasks of a Director (role),
+         * whom comminicates mostly with Managers, can be seen as domain object tasks.
+         *
+         * 2. Data Mappers, Repository `resources`
+         * Parses storage data from (SQL, XML, file, ..) from and to resources.
+         * For example Query execution is not a task of a Manager or Director. Query execution is the task of a Worker.
+         * Mostly Manager requires a Worker from the Director (and the Director ModelMaps/...)
+         * and Manager can comminicate directly (not via the Director per se) with the Woker.
+         * For example $this->model("product")->finder("Foo");
+         *
+         * 3. Services, higher domain level objects `objects`
+         * Allows access to the model layer.
+         * Interacts Domain Objects and Mappers (descriptors)
+         * Services are public to the Domain Object(s)/Business logic.
+         *
+         * Interacting with a model
+         * Controller of the MVC should only comminicate trough Services.
+         * Director provides a ServiceFactory here.
+         * Director neither Worker know beforehand what kind of items they will be making.
+         *
+         * //I am not ok with this Factory thing yet.
+         * The Factory Method design pattern can be applied where the Worker does not know beforehand which component should be called at runtime.
+         * Factory within this (Director) context.
+         * The Director maps to any Service. Which service can be defined in a map. So Mapping and Factory method solves the same problem?
+         * When there is need for subclasses, the Mapping might get complex?
+         * A class that builds via fluent interface actually a factory object?
+         *
+         *
+         * //basic structure of model layer, is created by Director.
+         * $serviceFactory = new ServiceFactory(
+         *  new DataMapperFactory($pdo),
+         *  new DomainObjectFactory
+         * );
+         * $serviceFactory->setDefaultNamespace('Application\\Service');
+         *
+         *
+         *
+         */
+
+        //@todo map to (Factory to) Service(s) and call them here. Services-call only here.
+
         //@Notice, having model,logic,view or not to return a module is completely in the control of the director. This allows us to make future improvements.
-        return new $this->modelMap[$model]['model']($context, new $this->modelMap[$model]['logic'](), new $this->modelMap[$model]['mapper']()
+        return new $this->modelMap[$model]['model']( //this one should be Service
+            new $this->modelMap[$model]['logic'](), //DomainObjectFactory (the input?)
+            $context, //
+            new $this->modelMap[$model]['mapper']() //DataMapperFactory or Repository? (the output)
         );
+
+        /*
+         * Example user Service
+         *
+         * $account = $this->domainObjectFactory("user");
+         * $mapper = $this->dataMapperFactory("user");
+         *
+         * $mapper->fetch($account);
+         *
+         * So, the $context = "user" seems shared here.
+         *
+         */
+
+        /*
+         * Rerpository might need to collect data from multiple resources. E.g. File, Database.
+         * The DomainObject will then collect these.
+         *
+         *
+         */
+
+
     }
 
 }

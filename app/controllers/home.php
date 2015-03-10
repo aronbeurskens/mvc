@@ -37,6 +37,7 @@ class home extends Director
         //Prepare a view formation
         $template = new \app\views\Template;
         $path = $template->getPath("/frontend/index.php");
+       //@todo paths should also defined/returned by model (Director)? So the model returns multiple include paths, $model->getPaths()?
 
         //Provide model to the View
         $view = new \src\vendor\Webist\View;
