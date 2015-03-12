@@ -85,6 +85,14 @@ class Director
 
     public function model($model, $context = null)
     {
+        /*
+         * in the simpliest way we would do this
+         * include "models/{$model}.php
+         * So, only direction.
+         *
+         *
+         */
+
         /* a research how to structure a model
          * http://stackoverflow.com/questions/5863870/how-should-a-model-be-structured-in-mvc
          * (contact this guy and show the github dir)
@@ -146,14 +154,39 @@ class Director
          *
          *
          */
+        //possible values
+        //private $repository;
+                //private $adapter; //maybe only need for the Director self.
+        //private $permissions;//authentication
+                //users and roles
+        //private $services;
+                //privte $package
+        //private $workers; //not process-workers per se, but whom can be make available for executing a task. Chain of Resp here? http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern
+                  //private $sanitizer;
+                  //private $commands
+        ////private $strategy; //supports a strategy to managers
+        //private $observer; //make an observer available
+        //private $logger;
+
+        //private $decorator;
+
+
+        //Zie ook Jeffrey Way, Laracon, Laracasts.com
 
         //@todo map to (Factory to) Service(s) and call them here. Services-call only here.
 
         //@Notice, having model,logic,view or not to return a module is completely in the control of the director. This allows us to make future improvements.
-        return new $this->modelMap[$model]['model']( //this one should be Service
-            new $this->modelMap[$model]['logic'](), //DomainObjectFactory (the input?)
-            $context, //
-            new $this->modelMap[$model]['mapper']() //DataMapperFactory or Repository? (the output)
+
+        return new $this->modelMap[$model]['model']( //this one should be Service like thing.
+
+            $context, //input for the Director is where to look at (which scope) that given by request.
+
+            new $this->modelMap[$model]['mapper'](), //Context for the Director itself. DataMapperFactory or Repository? Obviously he could map to db and make the correct db available.
+
+            new $this->modelMap[$model]['logic']() //DomainObjectFactory. Make here the calc, modifications etc.
+
+
+
         );
 
         /*
@@ -172,6 +205,13 @@ class Director
          * Rerpository might need to collect data from multiple resources. E.g. File, Database.
          * The DomainObject will then collect these.
          *
+         *
+         */
+
+        /**
+         * Triad according to DDD.
+         * Entity : When an object can change it’s attributes but remain the same object we call it an Entity. E.g. Person. http://culttt.com/2014/04/30/difference-entities-value-objects/
+         * Value Object : e.g. Location. must be possible to create multiple.
          *
          */
 
