@@ -48,10 +48,11 @@ class Router
         //@Notice since $routes is not global class var (not $this->routes), by the end of the function memory will be auto-freed-up.
         $routes = include_once "../data/system/routes.php";
 
-        if (array_key_exists($context, $routes)) {
-            if (array_key_exists($method, $routes[$context])) {
+        if (array_key_exists($context, $routes)) { // "/" GET
+
+            if (array_key_exists($method, $routes[$context]["controller"])) {
                 //@todo keep track of handlers usage and reindex routes file
-                $this->handler = $routes[$context][$method];
+                $this->handler = $routes[$context]["controller"][$method];
             }
         }
 

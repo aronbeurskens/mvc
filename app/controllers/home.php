@@ -12,15 +12,18 @@
 
 namespace app\controllers;
 
-class home extends Director
+class home //extends \app\BaseController
 {
 
     //@Notice, no constructor here. A controller is a ( Coordinator, Manager, Facilitator) for the others.
     //Controller itself does not really work.
     //It receives requests, requires permissions and sends tasks, not more.
 
-    public function index($request)
+    //@todo request can be better injected to higher level (shared) object.
+    public function index()
     {
+
+
 
         //@Alert, do not call modules here. A module should be the part of a model directed by the Director object.
         //calling Services via Director also should be a better practice.
@@ -32,7 +35,13 @@ class home extends Director
         //@Tip, ask yourself. Why a Controller should have more than 3 objects? Does it make sense?
 
         //Prepare Model by letting the Director match the model within the current request context
-        $model = $this->model("view", $request->server("REQUEST_URI"));
+        #$model = $this->model("view", $request->server("REQUEST_URI"));
+        //$viewmodel = $this->getModel("view");
+
+        //@todo there must be a way using \Request without duplicately calling it.
+        $request = new \src\vendor\Webist\Request;
+
+        $viewmodel =  new \app\models\view\model($request->server("REQUEST_URI"));
 
         //Prepare a view formation
         $template = new \app\views\Template;
@@ -41,7 +50,7 @@ class home extends Director
 
         //Provide model to the View
         $view = new \src\vendor\Webist\View;
-        $view->render($path, $model);
+        $view->render($path, $viewmodel);
     }
 
 }

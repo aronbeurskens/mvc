@@ -91,7 +91,7 @@ class logic
         if ($element === null) {
             $this->selection = implode(" ", $this->data[$property][$property]);
         } else {
-            $this->selection = $this->data[$property][$context][$element];
+             $this->selection = $this->data[$property][$context][$element];
         }
         return $this->selection;
     }

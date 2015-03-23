@@ -84,9 +84,11 @@ class Request
 
             //_GET
             if ($this->method() === "GET") {
+
                 if ($key !== null && null !== ($param = $this->get($key) )) {
                     $result = explode('/', filter_var(rtrim($param, "/"), FILTER_SANITIZE_URL));
                 }
+
                 $result = ($result === null) ? filter_input_array(INPUT_GET) : $result;
             }
 
