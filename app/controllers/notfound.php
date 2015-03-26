@@ -11,9 +11,18 @@
  */
 
 namespace app\controllers;
+use app\Base;
 
-class notfound //extends \app\BaseController
+class notfound extends Base
 {
+
+    private $request;
+
+
+    public function __construct($request)
+    {
+          $this->request = $request;
+    }
 
     public function index()
     {
@@ -27,16 +36,18 @@ class notfound //extends \app\BaseController
 
 
         //@todo there must be a way using \Request without duplicately calling it.
-        $request = new \src\vendor\Webist\Request;
+        //$request = new \src\vendor\Webist\Request;
 
-        $viewmodel =  new \app\models\view\model($request->server("REQUEST_URI"));
+
+        //Prepare Model (or Service Container) by letting the Base match the model within the current request context
+        $viewmodel = $this->getModel("view");
 
         //Prepare a view formation
-        $template = new \app\views\Template;
+        $template = $this->getTemplate();
         $path = $template->getPath("/notfound/index.php");
 
         //Provide model to the view
-        $view = new \src\vendor\Webist\View;
+        $view = $this->getView();
         $view->render($path, $viewmodel);
     }
 

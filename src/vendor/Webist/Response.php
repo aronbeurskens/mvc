@@ -8,6 +8,7 @@
  * Created at : Feb 8, 2015 5:39:17 PM
  * UTF-8
  *
+ * Use Response from Symfony.They are lean services and solved most known problems.g
  */
 //@todo call response like this: return new Response($content, $status)->header('Content-Type', $value);
 class Response

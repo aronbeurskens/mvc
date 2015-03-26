@@ -15,6 +15,8 @@ class Autoloader
     //private variable cannot be used outside, so it makes sense to free-up memory. When the object re-used the private var could be reloaded.
     private $paths = [];
 
+
+
     /**
      *
      * @param type $vendordir, vendor directory is the fullpath that will be used inA APache as wel as in CLI mode
@@ -42,6 +44,22 @@ class Autoloader
     {
         return $this->paths;
     }
+   /**
+    private $request = null
+    public function setRequest($request){
+
+        if($this->request === null){
+            $this->request = $request;
+        }
+        return $this->request;
+    }
+
+    public function getRequest(){
+
+        return $this->request;
+    }
+    *
+    */
 
     private function isFile($class){
         $file = false;
@@ -57,6 +75,9 @@ class Autoloader
 
     private function loader($class)
     {
+        //make request available to every object.
+        //$request = $this->getRequest();
+
         try {
 
             $file = $this->isFile($class);

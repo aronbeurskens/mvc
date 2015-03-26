@@ -23,8 +23,22 @@ define("DOCROOT", str_replace("\\", DIRECTORY_SEPARATOR, ((((((isset($argc) ? $a
     ? PHP_SAPI : "apache") == "cli") ? dirname(__FILE__) : getcwd())));
 $autoloader->addPath(DOCROOT);
 
+//Service container, the App model.
+$base = new app\Base;
+//@todo better bind objects to a service to manage it easily. The get method should bind if not yet.
+//
+
+#$base->get("Request", new src\vendor\Webist\Request);
+#$base->get("Router", new src\vendor\Webist\Router);
+
+//$t = $base->get("Request", function() {
+//    return $this['request'];
+//});
+
+
 //Prepare the input reads
 $request = new src\vendor\Webist\Request;
+//$autoloader->setRequest($request);
 
 //Prepare Handler by letting the Router match the request with a pre-defined route
 $router = new src\vendor\Webist\Router;
@@ -43,11 +57,9 @@ $router = new src\vendor\Webist\Router;
  * But this BaseController will contain also the model, permissions info.
  * So the Controller can better directly focus on the model without caring about the request or domain etc. E.g. $this->getModel();
  */
-//var_dump($request, $router);
 
-$app = new app\Dispatcher($request, $router);
-$app->handle();
-
+$invoker = new \src\vendor\Webist\Dispatcher;
+return $invoker->handle($request, $router);
 
 
 /**
