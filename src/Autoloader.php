@@ -75,9 +75,6 @@ class Autoloader
 
     private function loader($class)
     {
-        //make request available to every object.
-        //$request = $this->getRequest();
-
         try {
 
             $file = $this->isFile($class);

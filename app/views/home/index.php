@@ -18,8 +18,4 @@ class index
      * @see Template, View object
      */
 
-    /*
-     * include dirname(dirname(dirname(DOCROOT)))
-            . "/frontend.local/public_html/metronic_v3.6.2/theme/templates/frontend/index.php"
-     */
 }

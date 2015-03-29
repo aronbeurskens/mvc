@@ -11,9 +11,8 @@
  */
 
 namespace app\controllers;
-use app\Base;
 
-class notfound extends Base
+class notfound extends \app\base\Controller
 {
 
     private $request;
@@ -27,20 +26,8 @@ class notfound extends Base
     public function index()
     {
 
-        //print_r($this);
-
-        //@Tip, ask yourself. Why a Controller should have more than 3 objects? Does it make sense?
-
-        //Prepare Model by letting the Director match the model within the current request context
-        //$model = $this->model("view", $request->server("REQUEST_URI"));
-
-
-        //@todo there must be a way using \Request without duplicately calling it.
-        //$request = new \src\vendor\Webist\Request;
-
-
-        //Prepare Model (or Service Container) by letting the Base match the model within the current request context
-        $viewmodel = $this->getModel("view");
+        //Prepare Model (or Service Container) by letting the base\Controller match the model within the current request context
+        $viewmodel = $this->getModel($this->request->server("REQUEST_URI"), "view");
 
         //Prepare a view formation
         $template = $this->getTemplate();

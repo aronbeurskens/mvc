@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project name: MVC
+ * Project name: Webist MVC
  * @/webist/mvc
  * @name Response.php
  * @author Webist

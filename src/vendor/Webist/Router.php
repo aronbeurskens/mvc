@@ -14,8 +14,6 @@ namespace src\vendor\Webist;
 
 class Router
 {
-    //avaiable (registered) location-links (destinations) container
-    //private $routes = [];
 
     private $handler = "app\\controllers\\notfound";
 
@@ -27,14 +25,14 @@ class Router
      */
     function get($pattern, callable $handler)
     {
-        //$this->routes[$pattern]["GET"] = $handler;
-        //return $this;
+        $this->routes[$pattern]["GET"] = $handler;
+        return $this;
     }
 
     function post($pattern, callable $handler)
     {
-        //$this->routes[$pattern]["POST"] = $handler;
-        //return $this;
+        $this->routes[$pattern]["POST"] = $handler;
+        return $this;
     }
 
     function match($context, $method)

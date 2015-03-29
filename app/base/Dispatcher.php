@@ -10,12 +10,12 @@
  *
  */
 
-namespace src\vendor\Webist;
+namespace app\base;
 
 class Dispatcher
 {
 
-    public function handle($request, $router, $defaultAction = "index")
+    public function dispatch($request, $router, $defaultAction = "index")
     {
         //find the route
         $handler = $router->match($request->server("REQUEST_URI"), $request->method());
@@ -39,7 +39,8 @@ class Dispatcher
      * @param type $request
      * @return type
      */
-    private function invoke($class, $action, $request){
+    private function invoke($class, $action, $request)
+    {
 
         $reflectionClass = new \ReflectionClass($class);
 
@@ -56,6 +57,7 @@ class Dispatcher
 
         //invoke the controller object with request injection and the action with parameters injection
         $reflectionMethod = new \ReflectionMethod($class, $action);
+
         return $reflectionMethod->invokeArgs($class, [$request->parameters()]);
     }
 

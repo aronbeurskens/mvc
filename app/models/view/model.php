@@ -80,8 +80,13 @@ class model
         //@todo $this->build(), build here factories.
     }
 
-
-    public function query($property, $callback = null) //page, title
+    /**
+     *
+     * @param type $field
+     * @param type $context
+     * @return type
+     */
+    public function query($field, $context) //page, title
     {
 
         /**
@@ -92,7 +97,15 @@ class model
          *
          * return $this->Value;
          */
-        return $this->logic->getData($property, $this->context, $callback);
+
+        /**
+         * //fluent interface.
+         * $model->line($ontext)->field($field);
+         *
+         * With this, the user can add filters like
+         * $model->query("title","page")->where("id", "=", 1);
+         */
+        return $this->logic->getData($context, $this->context, $field);
     }
 
 }

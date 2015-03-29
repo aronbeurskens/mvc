@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project name: MVC
+ * Project name: Webist MVC
  * @/webist/mvc
  * @name Template.php
  * @author Webist
@@ -17,7 +17,7 @@
  * A construct is too frequently loading data into the object. If not needed, then leave it.
  */
 
-namespace app\views;
+namespace app\base;
 
 class Template {
 
@@ -42,7 +42,7 @@ class Template {
 
         if($this->dir === null){
             $this->dir = dirname(dirname(dirname(DOCROOT)))
-            . "/frontend.local/public_html/metronic_v3.6.2/theme/templates";
+            . "/frontend.local/public_html/metronic_v3.7/theme/templates";
         }
         return $this->dir;
     }

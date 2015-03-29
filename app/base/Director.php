@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project name: MVC
+ * Project name: Webist MVC
  * @/webist/mvc
  * @name Director.php
  * @author Webist
@@ -10,7 +10,7 @@
  *
  */
 
-namespace app\controllers;
+namespace app\base;
 
 class Director
 {
